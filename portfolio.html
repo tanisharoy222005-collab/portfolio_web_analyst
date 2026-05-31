@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tanisha Roy — Web & Digital Analyst</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0e0e0e;
+    --paper: #f5f0e8;
+    --accent: #c8451a;
+    --muted: #6b6560;
+    --rule: #d4cfc6;
+    --highlight: #e8f4e8;
+    --mono: 'DM Mono', monospace;
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans: 'DM Sans', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.2rem 3rem;
+    background: var(--paper);
+    border-bottom: 1px solid var(--rule);
+  }
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 4rem;
+  }
+  .hero-left {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 5rem 3rem 5rem 5rem;
+    border-right: 1px solid var(--rule);
+  }
+  .hero-tag {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+  }
+  .hero-name {
+    font-family: var(--serif);
+    font-size: clamp(3rem, 5vw, 5.5rem);
+    line-height: 1.05;
+    font-weight: 700;
+    margin-bottom: 1.8rem;
+  }
+  .hero-name em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .hero-bio {
+    font-size: 1rem;
+    color: var(--muted);
+    max-width: 38ch;
+    line-height: 1.75;
+    margin-bottom: 2.5rem;
+  }
+  .hero-cta {
+    display: inline-block;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.85rem 2rem;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .hero-cta:hover { background: var(--accent); transform: translateY(-1px); }
+
+  .hero-right {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 5rem 4rem;
+    gap: 2.5rem;
+  }
+  .stat-block {
+    border-left: 2px solid var(--accent);
+    padding-left: 1.5rem;
+  }
+  .stat-num {
+    font-family: var(--serif);
+    font-size: 2.8rem;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+  .stat-label {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ── SECTION BASE ── */
+  section { padding: 5rem 5rem; }
+  .section-label {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.6rem;
+  }
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 3rem;
+  }
+  hr.rule {
+    border: none;
+    border-top: 1px solid var(--rule);
+    margin-bottom: 3rem;
+  }
+
+  /* ── CASE STUDIES ── */
+  #work { background: var(--paper); border-top: 1px solid var(--rule); }
+
+  .case-study {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 4rem;
+    padding: 3.5rem 0;
+    border-bottom: 1px solid var(--rule);
+    animation: fadeUp 0.6s ease both;
+  }
+  .case-study:last-child { border-bottom: none; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .cs-meta { padding-top: 0.3rem; }
+  .cs-index {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1rem;
+  }
+  .cs-org {
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+  }
+  .cs-date {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--muted);
+    margin-bottom: 1.5rem;
+  }
+  .cs-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .tag {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: transparent;
+    border: 1px solid var(--rule);
+    color: var(--muted);
+    padding: 0.25rem 0.6rem;
+  }
+
+  .cs-body {}
+  .cs-title {
+    font-family: var(--serif);
+    font-size: 1.55rem;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 1.2rem;
+  }
+  .cs-challenge, .cs-approach, .cs-outcome {
+    margin-bottom: 1.4rem;
+  }
+  .cs-section-label {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.4rem;
+  }
+  .cs-text {
+    font-size: 0.95rem;
+    color: #2a2520;
+    line-height: 1.8;
+  }
+  .outcome-box {
+    background: var(--highlight);
+    border-left: 3px solid #4a9a4a;
+    padding: 1rem 1.4rem;
+    margin-top: 0.4rem;
+  }
+  .outcome-box p {
+    font-size: 0.92rem;
+    line-height: 1.75;
+    color: #1a3d1a;
+  }
+  .outcome-box strong {
+    font-weight: 500;
+    color: #1a3d1a;
+  }
+
+  /* ── SKILLS ── */
+  #skills { background: var(--ink); color: var(--paper); }
+  #skills .section-title { color: var(--paper); }
+  #skills .section-label { color: #888; }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1px;
+    background: #222;
+    border: 1px solid #222;
+  }
+  .skill-cell {
+    background: #111;
+    padding: 1.8rem;
+    transition: background 0.2s;
+  }
+  .skill-cell:hover { background: #1a1a1a; }
+  .skill-cell-label {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.6rem;
+  }
+  .skill-cell-title {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--paper);
+    margin-bottom: 0.5rem;
+  }
+  .skill-cell-desc {
+    font-size: 0.82rem;
+    color: #888;
+    line-height: 1.6;
+  }
+
+  /* ── CONTACT ── */
+  #contact { border-top: 1px solid var(--rule); }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+  .contact-note {
+    font-size: 1.05rem;
+    color: var(--muted);
+    line-height: 1.8;
+    max-width: 40ch;
+  }
+  .contact-links { display: flex; flex-direction: column; gap: 1.2rem; }
+  .contact-link {
+    display: flex; align-items: center; gap: 1rem;
+    text-decoration: none;
+    color: var(--ink);
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 1.2rem;
+    transition: border-color 0.2s;
+  }
+  .contact-link:hover { border-color: var(--accent); }
+  .contact-link:hover .cl-label { color: var(--accent); }
+  .cl-icon {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--muted);
+    width: 3rem;
+  }
+  .cl-label {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.05em;
+    transition: color 0.2s;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink);
+    color: #555;
+    text-align: center;
+    padding: 2rem;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1rem; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-left { padding: 5rem 1.5rem 3rem; border-right: none; border-bottom: 1px solid var(--rule); }
+    .hero-right { padding: 3rem 1.5rem; flex-direction: row; flex-wrap: wrap; gap: 1.5rem; }
+    section { padding: 4rem 1.5rem; }
+    .case-study { grid-template-columns: 1fr; gap: 1.5rem; }
+    .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-logo">Tanisha Roy</span>
+  <ul class="nav-links">
+    <li><a href="#work">Work</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-left">
+    <p class="hero-tag">Web &amp; Digital Analyst</p>
+    <h1 class="hero-name">Tanisha<br><em>Roy</em></h1>
+    <p class="hero-bio">
+      CS graduate (June 2026) who lives between the tag debugger and the stakeholder deck — equally focused on how numbers are collected and what they mean. GA4 · GTM · BigQuery SQL · Looker Studio · Python.
+    </p>
+    <a href="#work" class="hero-cta">View Case Studies ↓</a>
+  </div>
+  <div class="hero-right">
+    <div class="stat-block">
+      <div class="stat-num">46</div>
+      <div class="stat-label">GA4/GTM issues audited &amp; rebuilt (dupes, broken tags, consent gaps)</div>
+    </div>
+    <div class="stat-block">
+      <div class="stat-num">~30%</div>
+      <div class="stat-label">Reduction in modelled data gaps via Consent Mode v2</div>
+    </div>
+    <div class="stat-block">
+      <div class="stat-num">3</div>
+      <div class="stat-label">Production dashboards serving weekly stakeholder reviews</div>
+    </div>
+  </div>
+</section>
+
+<!-- CASE STUDIES -->
+<section id="work">
+  <p class="section-label">Selected Work</p>
+  <h2 class="section-title">Case Studies</h2>
+  <hr class="rule">
+
+  <!-- CASE STUDY 1 -->
+  <article class="case-study">
+    <div class="cs-meta">
+      <div class="cs-index">01 / Experience</div>
+      <div class="cs-org">NERIST</div>
+      <div class="cs-date">Jan 2022 – May 2026 · Arunachal Pradesh</div>
+      <div class="cs-tags">
+        <span class="tag">GA4</span>
+        <span class="tag">GTM</span>
+        <span class="tag">BigQuery</span>
+        <span class="tag">Looker Studio</span>
+        <span class="tag">SQL</span>
+        <span class="tag">Consent Mode v2</span>
+      </div>
+    </div>
+    <div class="cs-body">
+      <h3 class="cs-title">Data &amp; Analytics Intern — Full GA4 Implementation &amp; Dashboard Build</h3>
+      <div class="cs-approach">
+        <p class="cs-section-label">What I Did</p>
+        <p class="cs-text">Designed and owned the GA4 measurement plan for the institutional web property — defined page taxonomy, event taxonomy, and custom dimensions to track user journeys across research and administrative sections. Conducted a full GTM audit identifying 46 issues (14 duplicate events, 11 broken tags, 9 events missing parameters, 3 Consent Mode gaps); rebuilt the container from scratch, raising average parameter coverage from ~15% to ~98%. Configured custom triggers, dataLayer push events, and variable mappings; debugged broken events end-to-end using GTM Preview and GA4 DebugView — including React SPA history-change tracking for virtual page_view. Wrote SQL against the GA4 BigQuery export for ad-hoc analyses on session quality, content engagement, and drop-off. Built Looker Studio dashboards consumed weekly by faculty and operations leads, with embedded 'so-what' commentary on each page. Implemented Consent Mode v2 defaults via GTM, reducing modelled data gaps from ~35% to ~8% of sessions.</p>
+      </div>
+      <div class="cs-outcome">
+        <p class="cs-section-label">Outcome</p>
+        <div class="outcome-box">
+          <p>Institution gained its first fully auditable analytics foundation. Weekly dashboard replaced ad-hoc screenshot reporting. <strong>Parameter coverage lifted from ~15% to ~98%; modelled data gaps cut from ~35% to ~8%.</strong> Full measurement spec delivered for future analyst handoff.</p>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- CASE STUDY 2 -->
+  <article class="case-study">
+    <div class="cs-meta">
+      <div class="cs-index">02 / Experience</div>
+      <div class="cs-org">IOCL – Digboi Refinery</div>
+      <div class="cs-date">May 2024 – Jul 2024 · Assam</div>
+      <div class="cs-tags">
+        <span class="tag">SQL</span>
+        <span class="tag">Python</span>
+        <span class="tag">Dashboarding</span>
+        <span class="tag">Data Documentation</span>
+      </div>
+    </div>
+    <div class="cs-body">
+      <h3 class="cs-title">Data Reporting Intern — Operational KPI Pipelines &amp; Management Dashboards</h3>
+      <div class="cs-approach">
+        <p class="cs-section-label">What I Did</p>
+        <p class="cs-text">Built SQL-based reporting pipelines on operational databases to extract KPIs for daily management dashboards, replacing manual Excel processes. Analysed historical operational data in Python to identify patterns and anomalies; presented findings with clear visualisations and a written so-what summary for non-technical management. Documented data definitions, metric calculation logic, and dashboard refresh schedules — establishing a single source of truth for reporting terminology across two departments.</p>
+      </div>
+      <div class="cs-outcome">
+        <p class="cs-section-label">Outcome</p>
+        <div class="outcome-box">
+          <p><strong>Manual Excel reporting replaced with automated SQL pipelines.</strong> Cross-departmental data definitions standardised for the first time. Findings presented directly to management with clear decision-oriented commentary.</p>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- CASE STUDY 3 -->
+  <article class="case-study">
+    <div class="cs-meta">
+      <div class="cs-index">03 / Experience</div>
+      <div class="cs-org">MAKAUT Portal</div>
+      <div class="cs-date">May 2025 – Jul 2025 · West Bengal</div>
+      <div class="cs-tags">
+        <span class="tag">GA4 Migration</span>
+        <span class="tag">GTM</span>
+        <span class="tag">A/B Testing</span>
+        <span class="tag">Python</span>
+        <span class="tag">Consent Mode v2</span>
+      </div>
+    </div>
+    <div class="cs-body">
+      <h3 class="cs-title">Web Analytics &amp; Reporting Intern — UA→GA4 Migration, A/B Test &amp; Consent Mode</h3>
+      <div class="cs-approach">
+        <p class="cs-section-label">What I Did</p>
+        <p class="cs-text">Owned end-to-end tracking for a university portal redesign — audited the legacy UA setup, migrated events to GA4 schema, and validated data accuracy post-migration against server-side logs. Designed and ran a full A/B test on two homepage CTA variants: calculated sample size (80% power, α = 0.05), instrumented via GTM, monitored data quality throughout, and wrote a post-test report with confidence intervals and a recommendation the web team adopted. Joined GA4 BigQuery export with internal CRM data using Python (pandas) to build a cross-channel attribution view — reconciling a 15%+ gap between GA4 session counts and backend enrolment records. Implemented Consent Mode v2 via GTM, reducing modelled data gaps by ~30%. Produced a weekly landing-page performance review (bounce rate, scroll depth, CTA click rate, form completion) presented directly to the digital marketing lead.</p>
+      </div>
+      <div class="cs-outcome">
+        <p class="cs-section-label">Outcome</p>
+        <div class="outcome-box">
+          <p><strong>Variant B CTA recommendation adopted by the web team.</strong> Consent Mode reduced modelled data gaps by ~30%. Cross-channel attribution view became the new standard for reconciling marketing and enrolment data.</p>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- PORTFOLIO PROJECTS -->
+  <article class="case-study">
+    <div class="cs-meta">
+      <div class="cs-index">04 / Portfolio</div>
+      <div class="cs-org">Personal Projects</div>
+      <div class="cs-date">github.com/tanisharoy222005-collab</div>
+      <div class="cs-tags">
+        <span class="tag">GA4</span>
+        <span class="tag">GTM</span>
+        <span class="tag">Looker Studio</span>
+        <span class="tag">BigQuery SQL</span>
+        <span class="tag">Python</span>
+      </div>
+    </div>
+    <div class="cs-body">
+      <h3 class="cs-title">Open-Source Analytics Portfolio</h3>
+      <div class="cs-approach">
+        <p class="cs-section-label">Projects</p>
+        <p class="cs-text"><strong>GA4 + GTM Audit &amp; Rebuild</strong> — Audited a live property with 46 issues; rebuilt container from a clean measurement plan. Deliverables: written audit report, implementation spec, rebuilt container JSON, before/after data quality comparison (parameter coverage ~15% → ~98%).<br><br>
+        <strong>Marketing Funnel Dashboard — Looker Studio</strong> — Multi-page dashboard on GA4 BigQuery export covering acquisition, landing page performance, funnel drop-off, and SEM efficiency with blended Google Ads data. Each page ends with a 'so-what' commentary block.<br><br>
+        <strong>A/B Test: Homepage CTA Optimisation</strong> — Full experiment lifecycle: hypothesis, sample-size calculation (80% power, α = 0.05), GTM instrumentation, 3-week runtime, post-test Python analysis with confidence intervals, written recommendation adopted by the web team.<br><br>
+        <strong>BigQuery GA4 SQL Library</strong> — Production-quality SQL for session quality, content engagement, funnel drop-off, and GA4-vs-CRM reconciliation — each query commented with the business question it answers.</p>
+      </div>
+    </div>
+  </article>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <p class="section-label">Capabilities</p>
+  <h2 class="section-title">Technical Skills</h2>
+  <hr class="rule" style="border-color: #222;">
+  <div class="skills-grid">
+    <div class="skill-cell">
+      <div class="skill-cell-label">Tracking</div>
+      <div class="skill-cell-title">GA4 &amp; GTM</div>
+      <div class="skill-cell-desc">Events, dimensions, explorations, BigQuery export. Custom triggers, dataLayer, Preview/Debug end-to-end.</div>
+    </div>
+    <div class="skill-cell">
+      <div class="skill-cell-label">Data</div>
+      <div class="skill-cell-title">SQL &amp; BigQuery</div>
+      <div class="skill-cell-desc">Window functions, CTEs, joins, ad-hoc pulls. PostgreSQL &amp; MySQL. Reconciliation against GA4 exports.</div>
+    </div>
+    <div class="skill-cell">
+      <div class="skill-cell-label">Visualisation</div>
+      <div class="skill-cell-title">Looker Studio &amp; Power BI</div>
+      <div class="skill-cell-desc">Built for non-analysts. Clear visual hierarchy, blended data sources, embedded so-what commentary.</div>
+    </div>
+    <div class="skill-cell">
+      <div class="skill-cell-label">Programming</div>
+      <div class="skill-cell-title">Python</div>
+      <div class="skill-cell-desc">pandas, numpy, matplotlib, seaborn. Data cleaning, attribution modelling, A/B test evaluation.</div>
+    </div>
+    <div class="skill-cell">
+      <div class="skill-cell-label">Privacy</div>
+      <div class="skill-cell-title">Consent Mode v2</div>
+      <div class="skill-cell-desc">Google Consent Mode v2, server-side GTM concepts, GDPR/cookie consent, data retention settings.</div>
+    </div>
+    <div class="skill-cell">
+      <div class="skill-cell-label">Experimentation</div>
+      <div class="skill-cell-title">A/B Testing</div>
+      <div class="skill-cell-desc">Test design, sample size calculation, statistical significance, post-test writeup and recommendation.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <p class="section-label">Get in Touch</p>
+  <h2 class="section-title">Let's Talk Analytics</h2>
+  <hr class="rule">
+  <div class="contact-grid">
+    <p class="contact-note">Open to web analyst, digital analyst, and data analyst roles. Happy to discuss measurement strategy, GTM implementations, or BigQuery — reach out on any of the channels below.</p>
+    <div class="contact-links">
+      <a class="contact-link" href="mailto:tanisharoy222005@gmail.com">
+        <span class="cl-icon">Email</span>
+        <span class="cl-label">tanisharoy222005@gmail.com</span>
+      </a>
+      <a class="contact-link" href="https://linkedin.com/in/tanisha-roy-1826a6391" target="_blank">
+        <span class="cl-icon">LinkedIn</span>
+        <span class="cl-label">linkedin.com/in/tanisha-roy-1826a6391</span>
+      </a>
+      <a class="contact-link" href="https://github.com/tanisharoy222005-collab" target="_blank">
+        <span class="cl-icon">GitHub</span>
+        <span class="cl-label">github.com/tanisharoy222005-collab</span>
+      </a>
+      <a class="contact-link" href="tel:+918617875594">
+        <span class="cl-icon">Phone</span>
+        <span class="cl-label">+91 86178 75594</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Tanisha Roy &nbsp;·&nbsp; Web &amp; Digital Analyst &nbsp;·&nbsp; GA4 · GTM · SQL · Python</p>
+</footer>
+
+</body>
+</html>
